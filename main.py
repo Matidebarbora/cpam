@@ -15,11 +15,13 @@ recargo = int(input("Ingrese % de recargo de honorarios: "))
 def replanteo_y_amojonamiento (nro_parcelas):
     
     honorarios = (valor_base_acta + valor_parcela) + ((nro_parcelas - 1) * valor_parcela)
+    honorarios_extra = honorarios * (1 + (recargo / 100))
     retenciones_cpam = round(((honorarios * (valor_matricula / 100) + valor_autoconsulta + valor_geofada) / valor_agrim), 0)
     sellado_cpam = retenciones_cpam * valor_agrim
     print ("")
     print ("===========================================")
-    print ("Honorarios: $",honorarios)
+    print ("Honorarios base: $",honorarios)
+    print (f"Honorarios con extra: $",honorarios_extra)
     print (f"Sellados CPAM: ${sellado_cpam:.0f}")
     print ("===========================================")
 
