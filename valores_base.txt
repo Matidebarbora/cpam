@@ -1,8 +1,0 @@
-{
-    "base_acta": 388800.0,
-    "parcela": 48000.0,
-    "matricula_pct": 5.0,
-    "tasa_autoconsulta": 600.0,
-    "geofada": 720.0,
-    "agrim": 300.0
-}

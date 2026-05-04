@@ -1,28 +1,41 @@
-# ----------- VALORES BASES ---------------------------------------
-valor_base_acta = 388800
-valor_parcela = 48000
-valor_certificacion_parcelaria = 500000
-valor_actar_sector_obra = 333000
-valor_agrim = 300
-valor_autoconsulta = 600
-valor_geofada = 720
-valor_matricula = 5 # expresado en %. Es el porcentaje que retiene el colegio.
+from calculos import replanteo_y_amojonamiento
 
-# ----------- VARIABLES -------------------------------------------
-nro_parcelas = int(input("Ingrese cantidad de parcelas: "))
-recargo = int(input("Ingrese % de recargo de honorarios: "))
+opciones = [1,2,3]
 
-def replanteo_y_amojonamiento (nro_parcelas):
-    
-    honorarios = (valor_base_acta + valor_parcela) + ((nro_parcelas - 1) * valor_parcela)
-    honorarios_extra = honorarios * (1 + (recargo / 100))
-    retenciones_cpam = round(((honorarios * (valor_matricula / 100) + valor_autoconsulta + valor_geofada) / valor_agrim), 0)
-    sellado_cpam = retenciones_cpam * valor_agrim
-    print ("")
-    print ("===========================================")
-    print ("Honorarios base: $",honorarios)
-    print (f"Honorarios con extra: $",honorarios_extra)
-    print (f"Sellados CPAM: ${sellado_cpam:.0f}")
-    print ("===========================================")
+print ("\n" + "="*49)
+print ("====== PROGRAMA PARA CÁLCULO DE HONORARIOS ======")
+print ("="*49)
+print ("\nMENU")
+print ("\nACTAS DE AMOJONAMIENTOS")
+print ("1. Replanteo y amojonamiento")
 
-replanteo_y_amojonamiento(nro_parcelas)
+opt = None
+
+while True:
+    try:
+        entrada = int(input("\nElija una opción: "))
+        if entrada in opciones:
+            opt = entrada
+            break
+        else:
+            print ("Opción inválida, vuelva a intentar")
+    except ValueError:
+        print ("Opción inválida, vuelva a intentar")
+
+if (opt == 1):
+    while True:
+        try:
+            nro_parcelas = int(input("Ingrese cantidad de parcelas: "))
+            recargo = int(input("Ingrese % de recargo de honorarios: "))
+            honorarios, honorarios_extra, sellado_cpam = replanteo_y_amojonamiento(nro_parcelas, recargo)
+            #print (type(honorarios))
+            print (f"\nHonorarios: ${honorarios}")
+            if recargo != 0:
+                #print (type(honorarios_extra))
+                print (f"Honorarios + {recargo}%: ${honorarios_extra}")
+                break
+            else:
+                break
+        except ValueError:
+            print ("Valor incorrecto")
+
