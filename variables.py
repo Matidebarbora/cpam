@@ -1,21 +1,5 @@
 import csv
 
-# --- General ------------------------
-valor_agrim = 300
-valor_autoconsulta = 600
-valor_geofada = 720
-valor_matricula = 5 # expresado en %. Es el porcentaje que retiene el colegio.
-
-# ---- Acta de amojonamiento ----------
-valor_acta_base = 388800
-valor_acta_parcela = 48000
-valor_acta_certificacion_parcelaria = 500000
-valor_acta_sector_obra = 333000
-
-# ---- Mensura -----------------------
-valor_mensura_base = 648000
-valor_mensura_parcela = 130000
-
 def cargar_configuracion():
     config = {}
     try:
@@ -26,10 +10,10 @@ def cargar_configuracion():
     except FileNotFoundError:
         # Valores por defecto por si el archivo no existe aún
         return {
-            "valor_agrim": 300, "valor_autoconsulta": 600, "valor_geofada": 720,
-            "valor_matricula": 5, "valor_acta_base": 388800, "valor_acta_parcela": 48000,
-            "valor_acta_certificacion_parcelaria": 500000, "valor_mensura_base": 648000,
-            "valor_mensura_parcela": 130000
+            "v_agrim": 300, "v_autoconsulta": 600, "v_geofada": 720,
+            "v_matricula": 5, "v_acta_base": 388800, "v_acta_parcela": 48000,
+            "v_acta_cert_parcel": 500000, "v_mensura_base": 648000,
+            "v_mensura_parcela": 130000
         }
     return config
 

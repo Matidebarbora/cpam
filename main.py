@@ -3,9 +3,12 @@ import sys
 import time
 from colorama import Fore, Style, init
 from variables import cargar_configuracion, guardar_configuracion
-from calculos import base_mas_excedente_parcela
+from calculos import base_mas_excedente_parcela, mensura_con_fraccionamiento
 
 init(autoreset=True)
+
+ind4 = "    "
+ind8 = "        "
 
 NARANJA = '\033[38;5;214m'
 
@@ -71,47 +74,47 @@ def menu_principal():
         print("-"*49)
         print(Fore.BLUE + "TRABAJOS")
         print("-"*49)
-        print(Fore.MAGENTA + "ACTA DE AMOJONAMIENTO")
-        print("1.  Replanteo y Amojonamiento")
-        print("    Acta de amojonamiento baldío")
-        print("    Acta de amojonamiento edificado")
-        print("2.  Certificación Parcelaria")
-        print("3.  Acta de amojonamiento de sector de obra")
+        print("ACTA DE AMOJONAMIENTO")
+        print(ind4 + "1.  Replanteo y Amojonamiento")
+        print(ind8 + "Acta de amojonamiento baldío")
+        print(ind8 + "Acta de amojonamiento edificado")
+        print(ind4 + "2.  Certificación Parcelaria")
+        print(ind4 + "3.  Acta de amojonamiento de sector de obra (próximamente)")
         print("-"*49)
-        print(Fore.MAGENTA + "MENSURA")
-        print("4.  Mensura simple urbana")
-        print("    Mensura para derecho real de servidumbre")
-        print("    Mensura para derecho real de superficie")
-        print("    Mensura con unificación")
+        print("MENSURA")
+        print(ind4 + "4.  Mensura simple urbana")
+        print(ind8 + "Mensura para derecho real de servidumbre")
+        print(ind8 + "Mensura para derecho real de superficie")
+        print(ind8 + "Mensura con unificación")
         print("-"*49)
-        print(Fore.MAGENTA + "MENSURA CON FRACCIONAMIENTO")
-        print("5.  Mensura de 2 a 120 parcelas")
+        print("MENSURA CON FRACCIONAMIENTO")
+        print(ind4 + "5.  Mensura de 2 a 120 parcelas")
         print("-"*49)
-        print(Fore.MAGENTA + "CONJUNTO INMOBILIARIO")
-        print("6.  Conjunto inmobiliario")
+        print("CONJUNTO INMOBILIARIO (próximamente)")
+        print(ind4 + "6.  Conjunto inmobiliario")
         print("-"*49)
-        print(Fore.MAGENTA + "MENSURA EN PROPIEDAD HORIZONTAL")
-        print("7.  PH según cantidad de unidades funcionales")
+        print("MENSURA EN PROPIEDAD HORIZONTAL (próximamente)")
+        print(ind4 + "7.  PH según cantidad de unidades funcionales")
         print("-"*49)
-        print(Fore.MAGENTA + "MENSURA RURAL")
-        print("8.  Cálculo según cantidad de hectáreas")
+        print("MENSURA RURAL (próximamente)")
+        print(ind4 + "8.  Cálculo según cantidad de hectáreas")
         print("-"*49)
-        print(Fore.MAGENTA + "NIVELACIÓN GEOMÉTRICA")
-        print("9.  Nivelación geométrica")
-        print("10. Colocación PF (c/coord. y monogr.)")
+        print("NIVELACIÓN GEOMÉTRICA (próximamente)")
+        print(ind4 + "9.  Nivelación geométrica")
+        print(ind4 + "10. Colocación PF (c/coord. y monogr.)")
         print("-"*49)
-        print(Fore.MAGENTA + "RELEVAMIENTO PLANIMÉTRICO")
-        print("11. Levantamiento planimétrico por cantidad de hectareas")
+        print("RELEVAMIENTO PLANIMÉTRICO (próximamente)")
+        print(ind4 + "11. Levantamiento planimétrico por cantidad de hectareas")
         print("-"*49)
-        print(Fore.MAGENTA + "CÁLCULOS VARIOS")
-        print("12. Consulta y asesoría")
-        print("13. Georreferenciación parcelaria")
-        print("14. Día de campo")
-        print("14. Apertura de rumbo y desmonte")
+        print("CÁLCULOS VARIOS (próximamente)")
+        print(ind4 + "12. Consulta y asesoría")
+        print(ind4 + "13. Georreferenciación parcelaria")
+        print(ind4 + "14. Día de campo")
+        print(ind4 + "15. Apertura de rumbo y desmonte")
         print("-"*49)
         print(Fore.BLUE + "CONFIGURACIÓN")
-        print("R. Visualizar tabla de valores actuales")
-        print("E. Editar valores (CSV)")
+        print(ind4 + "R. Visualizar tabla de valores actuales")
+        print(ind4 + "E. Editar valores (CSV)")
         print("-"*49)
         print(Fore.RED + "Q. Salir")
 
@@ -132,26 +135,29 @@ def menu_principal():
             try:
                 nro_parcelas = int(input("\nIngrese cantidad de parcelas: "))
                 recargo_in = input("Ingrese % de recargo (Enter para 0): ")
-                
-                # Manejo de coma en el recargo
                 recargo = float(recargo_in.replace(',', '.')) if recargo_in.strip() != "" else 0
                 
                 if opt == '1':
-                    v_base, v_parc = c['valor_acta_base'], c['valor_acta_parcela']
+                    v_base, v_parc = c['v_acta_base'], c['v_acta_parcela']
+                    h, hextra, sellado = base_mas_excedente_parcela(v_base, v_parc, nro_parcelas, recargo, c)
                 elif opt == '2':
-                    v_base, v_parc = c['valor_acta_certificacion_parcelaria'], c['valor_acta_parcela']
-                else:
-                    v_base, v_parc = c['valor_mensura_base'], c['valor_mensura_parcela']
+                    v_base, v_parc = c['v_acta_cert_parcel'], c['v_acta_parcela']
+                    h, hextra, sellado = base_mas_excedente_parcela(v_base, v_parc, nro_parcelas, recargo, c)
+                elif opt == '4':
+                    v_base, v_parc = c['v_mensura_base'], c['v_mensura_parcela']
+                    h, hextra, sellado = base_mas_excedente_parcela(v_base, v_parc, nro_parcelas, recargo, c)
+                if opt == '5':
+                    v_base, v_parc = c['v_mensura_base'], c['v_mensura_parcela']
+                    h, hextra, sellado = mensura_con_fraccionamiento(nro_parcelas, recargo, c)
 
-                h, hextra, sellado = base_mas_excedente_parcela(v_base, v_parc, nro_parcelas, recargo, c)
+                
 
                 print("\n" + "-"*30)
                 print(Fore.GREEN + "CÁLCULO RESULTANTE")
                 print("-"*30)
                 
                 resultado = hextra if recargo != 0 else h
-                
-                # RESULTADOS EN NARANJA Y FORMATO LATINO
+            
                 print(f"Honorarios:    {NARANJA}${formato_moneda(resultado)}{Style.RESET_ALL}")
                 print(f"Sellado CPAM:  {NARANJA}${formato_moneda(sellado)}{Style.RESET_ALL}")
                 print("-"*30)
@@ -160,7 +166,10 @@ def menu_principal():
                 print(Fore.RED + "\n[!] Error: Ingrese números válidos.")
             
             continuar = input("\n¿Desea realizar otro cálculo? (s/n): ").lower()
-            if continuar != 's': break
+            if continuar != 's': 
+                print("\n¡Hasta luego!")
+                input("Presione Enter para salir...")
+                break
 
         elif opt == 'R':
             visualizar_tabla()
