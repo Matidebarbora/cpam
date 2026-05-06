@@ -8,10 +8,10 @@ def base_mas_excedente_parcela(valor_base, valor_excedente, nro_parcelas, recarg
     honorarios_extra = honorarios * (1 + (recargo / 100))
     sellado_cpam = sellado_agrim_cpam(
         honorarios, 
-        config['valor_matricula'], 
-        config['valor_autoconsulta'], 
-        config['valor_geofada'], 
-        config['valor_agrim']
+        config['v_matricula'], 
+        config['v_autoconsulta'], 
+        config['v_geofada'], 
+        config['v_agrim']
     )
     return honorarios, honorarios_extra, sellado_cpam
 
