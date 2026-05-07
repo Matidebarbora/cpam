@@ -1,4 +1,5 @@
 import csv
+import os
 
 def cargar_configuracion():
     config = {}
@@ -8,18 +9,12 @@ def cargar_configuracion():
             for fila in lector:
                 config[fila['nombre']] = float(fila['valor'])
     except FileNotFoundError:
-        # Valores por defecto por si el archivo no existe aún
-        return {
-            "v_agrim": 300, "v_autoconsulta": 600, "v_geofada": 720,
-            "v_matricula": 5, "v_acta_base": 388800, "v_acta_parcela": 48000,
-            "v_acta_cert_parcel": 500000, "v_mensura_base": 648000,
-            "v_mensura_parcela": 130000
-        }
+        return {} # Manejar valores por defecto aquí si se desea
     return config
 
-def guardar_configuracion(diccionario_datos):
+def guardar_configuracion_completa(lista_filas):
     with open('valores.csv', mode='w', newline='', encoding='utf-8') as f:
-        escritor = csv.DictWriter(f, fieldnames=['nombre', 'valor'])
+        campos = ['nombre', 'valor', 'descripcion']
+        escritor = csv.DictWriter(f, fieldnames=campos)
         escritor.writeheader()
-        for nombre, valor in diccionario_datos.items():
-            escritor.writerow({'nombre': nombre, 'valor': valor})
+        escritor.writerows(lista_filas)

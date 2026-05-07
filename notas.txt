@@ -1,0 +1,5 @@
+ANOTACIONES
+--------------------------------------------------------------------------------
+Linea de comando para generar el .exe
+pyinstaller --onefile --name "Calculador_Agrimensura" --icon=NONE main.py
+--------------------------------------------------------------------------------

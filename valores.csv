@@ -1,21 +1,21 @@
-nombre,valor
-v_agrim,300.0
-v_autoconsulta,600.0
-v_geofada,720.0
-v_matricula,5.0
-v_acta_base,388800.0
-v_acta_parcela,48000.0
-v_acta_cert_parcel,500000.0
-v_mensura_base,648000.0
-v_mensura_parcela,130000.0
-v_frac_2_5_base,648000
-v_frac_2_5_parc,135000
-v_frac_6_20_base,1323000
-v_frac_6_20_parc,105600
-v_frac_21_50_base,2907000
-v_frac_21_50_parc,78000
-v_frac_51_120_base,5247000
-v_frac_51_120_parc,75600
-v_frac_mas120_base,9027000
-v_frac_mas120_parc,59400
-v_frac_incremento_edificado,59400
+nombre,valor,descripcion
+v_agrim,300.0,Valor Agrim (Unidad de medida)
+v_autoconsulta,600.0,Derecho de Autoconsulta
+v_geofada,720.0,Tasa Geofada
+v_matricula,6.0,Porcentaje de Matrícula (%)
+v_acta_base,388800.0,Acta de Amojonamiento (Base)
+v_acta_parcela,48000.0,Acta de Amojonamiento (Parcela extra)
+v_acta_cert_parcel,500000.0,Certificación Parcelaria (Base)
+v_mensura_base,648000.0,Mensura Urbana (Base)
+v_mensura_parcela,130000.0,Mensura Urbana (Parcela extra)
+v_frac_2_5_base,648000.0,Fraccionamiento 2-5 (Base)
+v_frac_2_5_parc,135000.0,Fraccionamiento 2-5 (x Parcela)
+v_frac_6_20_base,1323000.0,Fraccionamiento 6-20 (Base)
+v_frac_6_20_parc,105600.0,Fraccionamiento 6-20 (x Parcela exc. 5)
+v_frac_21_50_base,2907000.0,Fraccionamiento 21-50 (Base)
+v_frac_21_50_parc,78000.0,Fraccionamiento 21-50 (x Parcela exc. 20)
+v_frac_51_120_base,5247000.0,Fraccionamiento 51-120 (Base)
+v_frac_51_120_parc,75600.0,Fraccionamiento 51-120 (x Parcela exc. 50)
+v_frac_mas120_base,9027000.0,Fraccionamiento +120 (Base)
+v_frac_mas120_parc,59400.0,Fraccionamiento +120 (x Parcela exc. 120)
+v_frac_incremento_edificado,59400.0,Incremento por Parcela Edificada (4.7)
