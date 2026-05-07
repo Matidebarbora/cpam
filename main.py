@@ -133,35 +133,82 @@ def menu_principal():
         if opt in ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', 'R', 'E', 'Q']:
             c = cargar_configuracion()
             try:
-                nro_parcelas = int(input("\nIngrese cantidad de parcelas: "))
-                recargo_in = input("Ingrese % de recargo (Enter para 0): ")
-                recargo = float(recargo_in.replace(',', '.')) if recargo_in.strip() != "" else 0
-                
                 if opt == '1':
+                    
+                    nro_parcelas = int(input("\nIngrese cantidad de parcelas: "))
+                    recargo_in = input("Ingrese % de recargo (Enter para 0): ")
+                    recargo = float(recargo_in.replace(',', '.')) if recargo_in.strip() != "" else 0
+
                     v_base, v_parc = c['v_acta_base'], c['v_acta_parcela']
                     h, hextra, sellado = base_mas_excedente_parcela(v_base, v_parc, nro_parcelas, recargo, c)
+
+                    resultado = hextra if recargo != 0 else h
+                    print("\n" + "-"*30)
+                    print(Fore.GREEN + "CÁLCULO RESULTANTE")
+                    print("-"*30)
+                    print(f"Honorarios:    {NARANJA}${formato_moneda(resultado)}{Style.RESET_ALL}")
+                    print(f"Sellado CPAM:  {NARANJA}${formato_moneda(sellado)}{Style.RESET_ALL}")
+                    print("-"*30)
+
                 elif opt == '2':
+                    
+                    nro_parcelas = int(input("\nIngrese cantidad de parcelas: "))
+                    recargo_in = input("Ingrese % de recargo (Enter para 0): ")
+                    recargo = float(recargo_in.replace(',', '.')) if recargo_in.strip() != "" else 0
+
                     v_base, v_parc = c['v_acta_cert_parcel'], c['v_acta_parcela']
                     h, hextra, sellado = base_mas_excedente_parcela(v_base, v_parc, nro_parcelas, recargo, c)
+
+                    resultado = hextra if recargo != 0 else h
+                    print("\n" + "-"*30)
+                    print(Fore.GREEN + "CÁLCULO RESULTANTE")
+                    print("-"*30)
+                    print(f"Honorarios:    {NARANJA}${formato_moneda(resultado)}{Style.RESET_ALL}")
+                    print(f"Sellado CPAM:  {NARANJA}${formato_moneda(sellado)}{Style.RESET_ALL}")
+                    print("-"*30)
+
                 elif opt == '4':
+
+                    nro_parcelas = int(input("\nIngrese cantidad de parcelas: "))
+                    recargo_in = input("Ingrese % de recargo (Enter para 0): ")
+                    recargo = float(recargo_in.replace(',', '.')) if recargo_in.strip() != "" else 0
+
                     v_base, v_parc = c['v_mensura_base'], c['v_mensura_parcela']
                     h, hextra, sellado = base_mas_excedente_parcela(v_base, v_parc, nro_parcelas, recargo, c)
+
+                    resultado = hextra if recargo != 0 else h
+                    print("\n" + "-"*30)
+                    print(Fore.GREEN + "CÁLCULO RESULTANTE")
+                    print("-"*30)
+                    print(f"Honorarios:    {NARANJA}${formato_moneda(resultado)}{Style.RESET_ALL}")
+                    print(f"Sellado CPAM:  {NARANJA}${formato_moneda(sellado)}{Style.RESET_ALL}")
+                    print("-"*30)
+
                 if opt == '5':
-                    v_base, v_parc = c['v_mensura_base'], c['v_mensura_parcela']
-                    h, hextra, sellado = mensura_con_fraccionamiento(nro_parcelas, recargo, c)
 
+                    nro_total = int(input("\nIngrese cantidad TOTAL de parcelas resultantes: "))
+        
+                    # Validación de parcelas edificadas
+                    while True:
+                        nro_edificadas = int(input("Ingrese cantidad de parcelas EDIFICADAS resultantes: "))
+                        if 0 <= nro_edificadas <= nro_total:
+                            break
+                        else:
+                            print(f"{Fore.RED}[!] Error: Las parcelas edificadas no pueden ser negativas ni superar al total ({nro_total}).")
+
+                    recargo_in = input("Ingrese % de recargo (Enter para 0): ")
+                    recargo = float(recargo_in.replace(',', '.')) if recargo_in.strip() != "" else 0
+                    
+                    h, hextra, sellado = mensura_con_fraccionamiento(nro_total, nro_edificadas, recargo, c)
+                    
+                    resultado = hextra if recargo != 0 else h
+                    print("\n" + "-"*30)
+                    print(f"{Fore.GREEN}CÁLCULO RESULTANTE")
+                    print("-" * 30)
+                    print(f"Honorarios:    {NARANJA}${formato_moneda(resultado)}{Style.RESET_ALL}")
+                    print(f"Sellado CPAM:  {NARANJA}${formato_moneda(sellado)}{Style.RESET_ALL}")
+                    print("-" * 30)
                 
-
-                print("\n" + "-"*30)
-                print(Fore.GREEN + "CÁLCULO RESULTANTE")
-                print("-"*30)
-                
-                resultado = hextra if recargo != 0 else h
-            
-                print(f"Honorarios:    {NARANJA}${formato_moneda(resultado)}{Style.RESET_ALL}")
-                print(f"Sellado CPAM:  {NARANJA}${formato_moneda(sellado)}{Style.RESET_ALL}")
-                print("-"*30)
-
             except ValueError:
                 print(Fore.RED + "\n[!] Error: Ingrese números válidos.")
             
