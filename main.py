@@ -123,8 +123,8 @@ def menu_principal():
                     nro = int(input("\nIngrese cantidad de parcelas: "))
                     rec_in = input("Ingrese % de recargo (Enter para 0): ")
                     rec = float(rec_in.replace(',', '.')) if rec_in.strip() != "" else 0
-                    v_b, v_p = c['v_acta_base'], c['v_acta_parcela']
-                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c)
+                    v_b, v_p, v_c = c['v_acta_base'], c['v_acta_parcela'], c['v_ajuste_cpam']
+                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c, v_c)
                     res = he if rec != 0 else h
                     print("\n" + "-"*30 + f"\nHonorarios: {NARANJA}${formato_moneda(res)}{Style.RESET_ALL}\nSellado CPAM: {NARANJA}${formato_moneda(sel)}{Style.RESET_ALL}\n" + "-"*30)
 
@@ -132,8 +132,8 @@ def menu_principal():
                     nro = int(input("\nIngrese cantidad de parcelas: "))
                     rec_in = input("Ingrese % de recargo (Enter para 0): ")
                     rec = float(rec_in.replace(',', '.')) if rec_in.strip() != "" else 0
-                    v_b, v_p = c['v_acta_cert_parcel'], c['v_acta_parcela']
-                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c)
+                    v_b, v_p, v_c = c['v_acta_base'], c['v_acta_parcela'], c['v_ajuste_cpam']
+                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c, v_c)
                     res = he if rec != 0 else h
                     print("\n" + "-"*30 + f"\nHonorarios: {NARANJA}${formato_moneda(res)}{Style.RESET_ALL}\nSellado CPAM: {NARANJA}${formato_moneda(sel)}{Style.RESET_ALL}\n" + "-"*30)
 
@@ -141,8 +141,8 @@ def menu_principal():
                     nro = int(input("\nIngrese cantidad de parcelas: "))
                     rec_in = input("Ingrese % de recargo (Enter para 0): ")
                     rec = float(rec_in.replace(',', '.')) if rec_in.strip() != "" else 0
-                    v_b, v_p = c['v_mensura_base'], c['v_mensura_parcela']
-                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c)
+                    v_b, v_p, v_c = c['v_acta_base'], c['v_acta_parcela'], c['v_ajuste_cpam']
+                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c, v_c)
                     res = he if rec != 0 else h
                     print("\n" + "-"*30 + f"\nHonorarios: {NARANJA}${formato_moneda(res)}{Style.RESET_ALL}\nSellado CPAM: {NARANJA}${formato_moneda(sel)}{Style.RESET_ALL}\n" + "-"*30)
 

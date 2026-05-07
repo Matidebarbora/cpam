@@ -1,5 +1,4 @@
 import csv
-import os
 
 def cargar_configuracion():
     config = {}

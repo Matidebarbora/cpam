@@ -2,7 +2,8 @@ nombre,valor,descripcion
 v_agrim,300.0,Valor Agrim (Unidad de medida)
 v_autoconsulta,600.0,Derecho de Autoconsulta
 v_geofada,720.0,Tasa Geofada
-v_matricula,6.0,Porcentaje de Matrícula (%)
+v_ajuste_cpam,6.0,% ajuste de honorarios CPAM
+v_matricula,5.0,% tasa CPAM
 v_acta_base,388800.0,Acta de Amojonamiento (Base)
 v_acta_parcela,48000.0,Acta de Amojonamiento (Parcela extra)
 v_acta_cert_parcel,500000.0,Certificación Parcelaria (Base)
