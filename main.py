@@ -3,7 +3,7 @@ import time
 import csv
 from colorama import Fore, Style, init
 from variables import cargar_configuracion, guardar_configuracion_completa
-from calculos import base_mas_excedente_parcela, mensura_con_fraccionamiento
+from calculos import calcular_opcion_1_y_2, calcular_opcion_4, mensura_con_fraccionamiento
 
 init(autoreset=True)
 
@@ -119,41 +119,24 @@ def menu_principal():
         if opt in ['1', '2', '4', '5']:
             c = cargar_configuracion()
             try:
-                if opt == '1':
+                if opt in ['1', '2']:
                     nro = int(input("\nIngrese cantidad de parcelas: "))
                     rec_in = input("Ingrese % de recargo (Enter para 0): ")
                     rec = float(rec_in.replace(',', '.')) if rec_in.strip() != "" else 0
-                    v_b, v_p, v_c = c['v_acta_base'], c['v_acta_parcela'], c['v_ajuste_cpam']
-                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c, v_c)
-                    res = he if rec != 0 else h
-                    print("\n" + "-"*30 + f"\nHonorarios: {NARANJA}${formato_moneda(res)}{Style.RESET_ALL}\nSellado CPAM: {NARANJA}${formato_moneda(sel)}{Style.RESET_ALL}\n" + "-"*30)
-
-                elif opt == '2':
-                    nro = int(input("\nIngrese cantidad de parcelas: "))
-                    rec_in = input("Ingrese % de recargo (Enter para 0): ")
-                    rec = float(rec_in.replace(',', '.')) if rec_in.strip() != "" else 0
-                    v_b, v_p, v_c = c['v_acta_base'], c['v_acta_parcela'], c['v_ajuste_cpam']
-                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c, v_c)
-                    res = he if rec != 0 else h
-                    print("\n" + "-"*30 + f"\nHonorarios: {NARANJA}${formato_moneda(res)}{Style.RESET_ALL}\nSellado CPAM: {NARANJA}${formato_moneda(sel)}{Style.RESET_ALL}\n" + "-"*30)
+                    calcular_opcion_1_y_2(nro, rec, c)
 
                 elif opt == '4':
                     nro = int(input("\nIngrese cantidad de parcelas: "))
                     rec_in = input("Ingrese % de recargo (Enter para 0): ")
                     rec = float(rec_in.replace(',', '.')) if rec_in.strip() != "" else 0
-                    v_b, v_p, v_c = c['v_acta_base'], c['v_acta_parcela'], c['v_ajuste_cpam']
-                    h, he, sel = base_mas_excedente_parcela(v_b, v_p, nro, rec, c, v_c)
-                    res = he if rec != 0 else h
-                    print("\n" + "-"*30 + f"\nHonorarios: {NARANJA}${formato_moneda(res)}{Style.RESET_ALL}\nSellado CPAM: {NARANJA}${formato_moneda(sel)}{Style.RESET_ALL}\n" + "-"*30)
+                    calcular_opcion_4(nro, rec, c)
 
                 elif opt == '5':
                     nro_t = int(input("\nIngrese cantidad TOTAL de parcelas: "))
                     nro_e = int(input("Ingrese cantidad de parcelas EDIFICADAS: "))
                     rec_in = input("Ingrese % de recargo (Enter para 0): ")
                     rec = float(rec_in.replace(',', '.')) if rec_in.strip() != "" else 0
-                    h, he, sel = mensura_con_fraccionamiento(nro_t, nro_e, rec, c)
-                    res = he if rec != 0 else h
-                    print("\n" + "-"*30 + f"\nHonorarios: {NARANJA}${formato_moneda(res)}{Style.RESET_ALL}\nSellado CPAM: {NARANJA}${formato_moneda(sel)}{Style.RESET_ALL}\n" + "-"*30)
+                    mensura_con_fraccionamiento(nro_t, nro_e, rec, c)
 
                 input("\nPresione Enter para continuar...")
             except ValueError:
